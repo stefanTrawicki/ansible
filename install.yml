@@ -27,6 +27,17 @@
         append: yes
         shell: /bin/zsh
 
+    - name: pull my dot files
+      git:
+        repo: https://github.com/stefanTrawicki/dot-files.git
+        dest: /home/{{ ansible_user }}/dot-files
+        clone: yes
+        update: yes
+
+    - name: run the dot file linker
+      command: sh /home/{{ ansible_user }}/dot-files/link.sh
+      ignore_errors: yes
+
   roles:
     - role: artis3n.tailscale
       vars:
