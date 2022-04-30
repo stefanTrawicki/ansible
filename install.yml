@@ -1,0 +1,35 @@
+---
+- name: installer
+  hosts: all
+  tasks:
+    - name: Install packages
+      apt:
+        name:
+          - nginx
+          - openssl
+          - vim
+          - zsh
+          - python3-pip
+          - git
+          - curl
+          - neofetch
+          - openssh-server
+          - docker
+          - docker.io
+          - docker-compose
+        state: present
+        update_cache: true
+
+    - name: change moduser
+      ansible.builtin.user:
+        name: '{{ ansible_user }}'
+        groups: docker,sudo
+        append: yes
+        shell: /bin/zsh
+
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        tailscale_up_skip: true
+    
+  become: yes

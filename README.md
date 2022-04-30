@@ -1,0 +1,1 @@
+`ansible-playbook -i inventory.txt ubuntu_install.yml -K -u s`
